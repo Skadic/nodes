@@ -1,0 +1,9 @@
+item.itemNode.name=Node
+item.itemNodeItem.name=Item Node
+item.itemNodeFluid.name=Fluid Node
+item.itemNodeEnergy.name=Energy Node
+item.itemNodeWrench.item.name=Node Wrench: Item
+item.itemNodeWrench.fluid.name=Node Wrench: Fluid
+item.itemNodeWrench.energy.name=Node Wrench: Energy
+
+tile.blockNodeNexus.name=Node Nexus
