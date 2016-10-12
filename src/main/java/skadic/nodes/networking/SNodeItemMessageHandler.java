@@ -15,11 +15,11 @@ import skadic.nodes.capabilities.ICapabilityNodeItem;
 /**
  * Created by eti22 on 09.10.2016.
  */
-public class NodeItemMessageHandler implements IMessageHandler<NodeItemMessage, IMessage> {
+public class SNodeItemMessageHandler implements IMessageHandler<SNodeItemMessage, IMessage> {
 
 
     @Override
-    public IMessage onMessage(final NodeItemMessage message, MessageContext ctx) {
+    public IMessage onMessage(final SNodeItemMessage message, MessageContext ctx) {
         IThreadListener mainThread = (WorldServer) ctx.getServerHandler().playerEntity.worldObj;
         final World world = ctx.getServerHandler().playerEntity.worldObj;
         mainThread.addScheduledTask(new Runnable() {
@@ -33,6 +33,7 @@ public class NodeItemMessageHandler implements IMessageHandler<NodeItemMessage, 
                     ICapabilityNodeItem itemCap = te.getCapability(CapabilityNodeItemProvider.ITEM_NODE_CAP, null);
                     itemCap.setHasNode(message.hasNode);
                     itemCap.setExport(message.isExporting);
+                    itemCap.setPriority(message.priority);
                 }
             }
         });

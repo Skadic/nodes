@@ -6,7 +6,6 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import skadic.nodes.utils.TagRef;
 
@@ -28,7 +27,8 @@ public class CapabilityNodeItemStorage implements Capability.IStorage<ICapabilit
 
         valueTag.setBoolean(TagRef.HAS_NODE, instance.hasNode());
         valueTag.setBoolean(TagRef.IS_EXPORTING, instance.getExport());
-
+        valueTag.setBoolean(TagRef.HAS_FILTER, instance.getHasFilter());
+        valueTag.setInteger(TagRef.PRIORITY, instance.getPriority());
 
         tagList.appendTag(valueTag);
 
@@ -52,10 +52,13 @@ public class CapabilityNodeItemStorage implements Capability.IStorage<ICapabilit
 
         instance.setHasNode(valueTag.getBoolean(TagRef.HAS_NODE));
         instance.setExport(valueTag.getBoolean(TagRef.IS_EXPORTING));
+        instance.setHasFilter(valueTag.getBoolean(TagRef.HAS_FILTER));
+        instance.setPriority(valueTag.getInteger(TagRef.PRIORITY));
 
         while (!tagList.hasNoTags()) {
             NBTTagCompound tag = tagList.getCompoundTagAt(0);
             instance.addToItemFilter(Item.getByNameOrId(tag.getString("id")));
+            tagList.removeTag(0);
         }
 
 

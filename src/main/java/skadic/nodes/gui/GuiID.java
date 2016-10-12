@@ -5,6 +5,6 @@ package skadic.nodes.gui;
  */
 public class GuiID {
     public static final int
-        NODE_CONTROLLER = 0
+            NODE_NEXUS = 0
     ;
 }

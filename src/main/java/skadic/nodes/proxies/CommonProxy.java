@@ -1,32 +1,31 @@
 package skadic.nodes.proxies;
 
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import skadic.nodes.Nodes;
 import skadic.nodes.blocks.BlockRegister;
 import skadic.nodes.capabilities.CapabilityNodeItemDefault;
 import skadic.nodes.capabilities.CapabilityNodeItemStorage;
 import skadic.nodes.capabilities.ICapabilityNodeItem;
-import skadic.nodes.container.ContainerNodeNexus;
 import skadic.nodes.crafting.CraftingRegister;
 import skadic.nodes.events.CapabilityHandler;
 import skadic.nodes.events.EventHandlerNodes;
 import skadic.nodes.gui.GuiID;
 import skadic.nodes.gui.GuiNodeNexus;
-import skadic.nodes.Nodes;
 import skadic.nodes.items.ItemRegister;
 import skadic.nodes.networking.NodePacketHandler;
 import skadic.nodes.tileentities.TileEntityNodeNexus;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static skadic.nodes.Nodes.SNW;
 import static skadic.nodes.Nodes.instance;
@@ -72,25 +71,24 @@ public class CommonProxy implements IGuiHandler{
 
     }
 
-
+    //will return the corresponding container
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         switch(ID){
-            case GuiID.NODE_CONTROLLER:
-                return new ContainerNodeNexus(player.inventory, (TileEntityNodeNexus)world.getTileEntity(pos));
+
             default:
                 return null;
         }
     }
 
-
+    //will return the corresponding gui
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         switch(ID){
-            case GuiID.NODE_CONTROLLER:
-                return new GuiNodeNexus((TileEntityNodeNexus)world.getTileEntity(pos), player.inventory);
+            case GuiID.NODE_NEXUS:
+                return new GuiNodeNexus((TileEntityNodeNexus)world.getTileEntity(pos));
             default:
                 return null;
         }

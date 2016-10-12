@@ -11,11 +11,7 @@ public class TagRef {
             FLUID_NODE_TAG = "fluidNode",
             ITEM_NODE_TAG = "itemNode",
             IS_EXPORTING = "isExporting",
-            NEXUS_X = "nexusX",
-            NEXUS_Y = "nexusY",
-            NEXUS_Z = "nexusZ",
-            GOAL_X = "goalX",
-            GOAL_Y = "goalY",
-            GOAL_Z = "goalZ"
+            HAS_FILTER = "hasFilter",
+            PRIORITY = "priority"
             ;
 }

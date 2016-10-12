@@ -13,6 +13,8 @@ public class CapabilityNodeItemDefault implements ICapabilityNodeItem {
     boolean export = true;
     TileEntityNodeNexus nexus;
     ArrayList<Item> itemFilter = new ArrayList<Item>();
+    boolean filter;
+    int priority = 0;
 
     public ArrayList<TileEntity> searchTileEntities(){
         if(nexus != null)
@@ -22,7 +24,7 @@ public class CapabilityNodeItemDefault implements ICapabilityNodeItem {
 
     @Override
     public void addToItemFilter(Item item) {
-        if(!itemFilter.contains(item))
+        if(!itemFilter.contains(item) && itemFilter.size() <= 8)
             itemFilter.add(item);
     }
 
@@ -38,6 +40,7 @@ public class CapabilityNodeItemDefault implements ICapabilityNodeItem {
         return items;
     }
 
+
     @Override
     public boolean isItemFiltered(Item item) {
         return itemFilter.contains(item);
@@ -50,8 +53,22 @@ public class CapabilityNodeItemDefault implements ICapabilityNodeItem {
     }
 
     @Override
+    public boolean setHasFilter(boolean hasFilter) {
+        if(filter != hasFilter){
+            filter = hasFilter;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean getHasFilter() {
+        return filter;
+    }
+
+    @Override
     public void setNexus(TileEntityNodeNexus te) {
-        nexus = te;
+        if(nexus == null) nexus = te;
     }
 
     @Override
@@ -83,5 +100,16 @@ public class CapabilityNodeItemDefault implements ICapabilityNodeItem {
     @Override
     public boolean hasNode() {
         return hasNode;
+    }
+
+
+    @Override
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    @Override
+    public int getPriority() {
+        return priority;
     }
 }

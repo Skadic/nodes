@@ -1,6 +1,7 @@
 package skadic.nodes.tileentities;
 
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -17,17 +18,16 @@ import java.util.ArrayList;
  * Created by eti22 on 20.03.2016.
  */
 public class TileEntityNodeNexus extends TileEntity implements ITickable {
-    int interval;
-    int radius;
-    long time;
+    private int interval;
+    private int radius;
+    private long time;
 
     ArrayList<TileEntity> tileEntities = new ArrayList<TileEntity>();
-    ArrayList<BlockPos> blockPoses = new ArrayList<BlockPos>();
 
     public TileEntityNodeNexus() {
         interval = 1;
         radius = 5;
-        time = System.nanoTime() / 1000000;
+        time = System.nanoTime() / 1000000; // in milliseconds
     }
 
     @Override
@@ -36,7 +36,18 @@ public class TileEntityNodeNexus extends TileEntity implements ITickable {
             if ((System.nanoTime() / 1000000 - time) >= 1000 * interval) {
                 time = System.nanoTime() / 1000000;
 
+
+
+
             }
+        }
+    }
+
+    private void pulse(){
+        searchTileEntities();
+
+        for (TileEntity te : tileEntities) {
+            ICapabilityNodeItem itemCap = te.getCapability(CapabilityNodeItemProvider.ITEM_NODE_CAP, null);
         }
     }
 
@@ -96,12 +107,12 @@ public class TileEntityNodeNexus extends TileEntity implements ITickable {
         ArrayList<TileEntity> exportingTE = new ArrayList<TileEntity>();
         for (TileEntity te : tileEntities) {
             ICapabilityNodeItem itemCap = te.getCapability(CapabilityNodeItemProvider.ITEM_NODE_CAP, null);
-            if (!itemCap.getExport()) exportingTE.add(te);
+            if (itemCap.getExport()) exportingTE.add(te);
         }
         return exportingTE;
     }
 
-    public ArrayList<TileEntity> getItemImports(){
+    public final ArrayList<TileEntity> getTileEntitiesImportingItem(Item item){
         return null;
     }
 

@@ -9,16 +9,11 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import javax.annotation.Nullable;
 
-/**
- * Created by eti22 on 05.10.2016.
- */
+@SuppressWarnings("all")
 public class CapabilityNodeItemProvider implements ICapabilitySerializable<NBTBase>{
 
-    TileEntity te;
 
-    public CapabilityNodeItemProvider(TileEntity te){
-        this.te = te;
-    }
+    public CapabilityNodeItemProvider(){}
 
     @CapabilityInject(ICapabilityNodeItem.class)
     public static final Capability<ICapabilityNodeItem> ITEM_NODE_CAP = null;

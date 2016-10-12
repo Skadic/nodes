@@ -18,6 +18,6 @@ public class CapabilityHandler {
 
     @SubscribeEvent
     public void attachCapability(AttachCapabilitiesEvent.TileEntity e){
-        if(e.getTileEntity() instanceof IInventory) e.addCapability(ITEM_NODE_CAPABILITY, new CapabilityNodeItemProvider(e.getTileEntity()));
+        if(e.getTileEntity() instanceof IInventory) e.addCapability(ITEM_NODE_CAPABILITY, new CapabilityNodeItemProvider());
     }
 }

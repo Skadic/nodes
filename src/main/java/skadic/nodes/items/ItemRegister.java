@@ -15,7 +15,8 @@ public class ItemRegister {
     itemNodeItem,
     itemNodeFluid,
     itemNodeEnergy,
-    itemNodeWrench
+    itemNodeWrench,
+    itemFilter
             ;
 
     public ItemRegister(){
@@ -28,6 +29,7 @@ public class ItemRegister {
         itemNodeFluid = new ItemNodeFluid("itemNodeFluid");
         itemNodeEnergy = new ItemNodeEnergy("itemNodeEnergy");
         itemNodeWrench = new ItemNodeWrench("itemNodeWrench");
+        itemFilter = new ItemFilter("itemFilter");
     }
 
     public static void registerRenders(){
@@ -38,6 +40,7 @@ public class ItemRegister {
         registerItemRender(itemNodeWrench, 0);
         registerItemRender(itemNodeWrench, 1);
         registerItemRender(itemNodeWrench, 2);
+        registerItemRender(itemFilter, 0);
     }
 
     private static void registerItemRender(Item item, int meta){

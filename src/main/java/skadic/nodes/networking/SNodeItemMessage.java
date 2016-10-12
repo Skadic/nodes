@@ -9,17 +9,19 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 /**
  * Created by eti22 on 09.10.2016.
  */
-public class NodeItemMessage implements IMessage{
+public class SNodeItemMessage implements IMessage{
 
     public boolean hasNode, isExporting;
+    public int priority;
     public BlockPos pos;
 
-    public NodeItemMessage(){}
+    public SNodeItemMessage(){}
 
-    public NodeItemMessage(BlockPos pos, boolean hasNode, boolean isExporting){
+    public SNodeItemMessage(BlockPos pos, boolean hasNode, boolean isExporting, int priority){
         this.pos = pos;
         this.hasNode = hasNode;
         this.isExporting = isExporting;
+        this.priority = priority;
     }
 
     @Override
@@ -31,6 +33,7 @@ public class NodeItemMessage implements IMessage{
 
         hasNode = buf.readBoolean();
         isExporting = buf.readBoolean();
+        priority = buf.readInt();
     }
 
     @Override
@@ -41,5 +44,6 @@ public class NodeItemMessage implements IMessage{
 
         buf.writeBoolean(hasNode);
         buf.writeBoolean(isExporting);
+        buf.writeInt(priority);
     }
 }
